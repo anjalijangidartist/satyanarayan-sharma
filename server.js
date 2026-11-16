@@ -5,6 +5,14 @@ const path = require("path");
 
 const ROOT = __dirname;
 const WORK_DIR = path.join(ROOT, "assets", "work");
+
+const PORTAL_ROUTES = new Map([
+  ["/api/portal/login", require("./lib/handlers/login")],
+  ["/api/portal/logout", require("./lib/handlers/logout")],
+  ["/api/portal/session", require("./lib/handlers/session")],
+  ["/api/portal/upload", require("./lib/handlers/upload")],
+  ["/api/portal/commit", require("./lib/handlers/commit")],
+]);
 const THUMB_DIR = path.join(ROOT, ".cache", "thumbs");
 const THUMB_WIDTH = 1200;
 const PORT = Number(process.env.PORT) || 4173;
@@ -387,13 +395,23 @@ function serveFile(request, response, pathname) {
 }
 
 const server = http.createServer(async (request, response) => {
+  const url = new URL(request.url, `http://${request.headers.host || "localhost"}`);
+  const pathname = url.pathname;
+
+  if (PORTAL_ROUTES.has(pathname)) {
+    await PORTAL_ROUTES.get(pathname)(request, response);
+    return;
+  }
+
+  if (pathname === "/manage" || pathname === "/manage/") {
+    serveFile(request, response, "/manage.html");
+    return;
+  }
+
   if (request.method !== "GET" && request.method !== "HEAD") {
     send(response, 405, "Method not allowed");
     return;
   }
-
-  const url = new URL(request.url, `http://${request.headers.host || "localhost"}`);
-  const pathname = url.pathname;
 
   if (pathname.startsWith("/thumb/")) {
     try {

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f5">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0b0c">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Private upload — Satyanarayan Sharma</title>
+  <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/manage.css">
+  <script src="/manage.js" defer></script>
+</head>
+<body class="portal-body">
+  <header class="top" id="top">
+    <nav class="nav" aria-label="Primary">
+      <a class="pill wordmark" href="/">Satyanarayan Sharma</a>
+      <div class="nav-links">
+        <button class="pill nav-link portal-logout" type="button" id="logout" hidden>Sign out</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="portal">
+    <section class="portal-view" id="login-view" aria-labelledby="login-title">
+      <div class="portal-card">
+        <h1 id="login-title">Private upload</h1>
+        <p class="portal-lede">Enter the password to add photos to the website.</p>
+
+        <form id="login-form" novalidate>
+          <label class="field-label" for="password">Password</label>
+          <input class="field-input" id="password" name="password" type="password" autocomplete="current-password" required>
+          <p class="form-error" id="login-error" role="alert" hidden></p>
+          <button class="button button-primary button-block" type="submit" id="login-submit">Sign in</button>
+        </form>
+
+        <p class="portal-note">This page is private. Only people with the password can add photos.</p>
+      </div>
+    </section>
+
+    <section class="portal-view" id="dashboard-view" hidden aria-labelledby="dashboard-title">
+      <div class="dashboard-head">
+        <h1 id="dashboard-title">Upload photos</h1>
+        <p class="portal-lede">Add photos to the gallery. They appear on the website in a few minutes.</p>
+      </div>
+
+      <form id="upload-form">
+        <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-controls="file-input">
+          <span class="dropzone-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 15.5V18a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="dropzone-title">Choose photos or drag them here</span>
+          <span class="dropzone-hint" id="dropzone-hint">JPEG, PNG or WebP. Up to 100 photos.</span>
+          <input id="file-input" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
+        </div>
+
+        <div class="selection" id="selection" hidden>
+          <div class="selection-head">
+            <h2>Selected photos <span class="selection-count" id="selection-count"></span></h2>
+            <button class="link-button" type="button" id="clear">Clear</button>
+          </div>
+          <ul class="preview-grid" id="preview-grid"></ul>
+        </div>
+
+        <div class="progress-wrap" id="progress-wrap" hidden>
+          <div class="progress-row">
+            <span id="progress-label">Uploading photos…</span>
+            <span id="progress-count"></span>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-bar" id="progress-bar"></div>
+          </div>
+        </div>
+
+        <p class="portal-summary" id="summary" role="status" hidden></p>
+
+        <div class="actions">
+          <button class="button button-primary" type="submit" id="upload-button" disabled>Upload photos</button>
+          <button class="button button-secondary" type="button" id="retry-button" hidden>Retry failed</button>
+        </div>
+      </form>
+
+      <p class="portal-note">Keep this page open while the photos upload.</p>
+    </section>
+  </main>
+</body>
+</html>
