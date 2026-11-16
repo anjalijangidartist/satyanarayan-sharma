@@ -1,0 +1,16 @@
+HOW TO OPEN
+
+1. Double-click start.sh (or open a terminal in this folder and run ./start.sh).
+2. The gallery opens at http://localhost:4173. Leave the terminal window open while viewing.
+
+ADDING WORK
+
+Put image files in assets/work/. JPG, PNG, WEBP, and GIF are supported.
+Subfolders inside assets/work/ are fine.
+Refresh the browser. That is all. No code changes.
+The title under each work comes from the file name. Rename the file to change the title.
+The sample images disappear automatically once you add your own.
+
+STOPPING
+
+Close the terminal window, or press Ctrl+C in it.

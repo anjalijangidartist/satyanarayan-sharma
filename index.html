@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f5">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0b0c">
+  <title>Satyanarayan Sharma — Work</title>
+  <meta name="description" content="Selected paintings and works on paper by artist Satyanarayan Sharma.">
+  <meta property="og:title" content="Satyanarayan Sharma — Work">
+  <meta property="og:description" content="Selected paintings and works on paper by artist Satyanarayan Sharma.">
+  <meta property="og:type" content="website">
+  <link rel="preload" href="assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/LibreCaslonCondensed-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#work">Skip to work</a>
+
+  <header class="top" id="top">
+    <nav class="nav" aria-label="Primary">
+      <a class="pill wordmark" href="#top">Satyanarayan Sharma</a>
+      <div class="nav-links">
+        <a class="pill nav-link" href="#work">Work</a>
+        <a class="pill nav-link" href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="work" aria-labelledby="work-title" tabindex="-1">
+      <h1 id="work-title">Work</h1>
+      <p class="hero-meta" id="work-count" aria-live="polite"></p>
+    </section>
+
+    <section class="works" aria-label="Artworks">
+      <div class="gallery" id="gallery"></div>
+
+      <div class="sentinel" id="sentinel" aria-hidden="true">
+        <span class="spinner"></span>
+      </div>
+
+      <p class="end-cap" id="end-cap" hidden></p>
+
+      <noscript>
+        <p class="notice">This gallery needs JavaScript to load the collection. Enable it to view the works.</p>
+      </noscript>
+    </section>
+  </main>
+
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="contact-grid">
+      <h2 id="contact-title">Contact</h2>
+      <div class="contact-body">
+        <p>For enquiries about available works, exhibitions, and commissions, write to <a href="mailto:studio@example.com">studio@example.com</a>.</p>
+        <p class="contact-note">Satyanarayan Sharma</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© <span id="year">2026</span> Satyanarayan Sharma</p>
+    <a class="to-top" href="#top">Back to top</a>
+  </footer>
+
+  <dialog class="viewer" id="viewer" aria-label="Artwork viewer">
+    <p class="sr-only">Use the left and right arrow keys to move between works. Press Escape to close.</p>
+
+    <div class="viewer-chrome">
+      <p class="viewer-count" id="viewer-count" aria-live="polite"></p>
+      <button class="viewer-close" type="button" id="viewer-close" aria-label="Close viewer">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <button class="viewer-nav viewer-prev" type="button" id="viewer-prev" aria-label="Previous artwork">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M14.5 5.5L8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <figure class="viewer-stage">
+      <div class="viewer-frame" id="viewer-frame">
+        <span class="viewer-spinner spinner" aria-hidden="true"></span>
+        <img id="viewer-img" alt="" decoding="async" draggable="false">
+      </div>
+      <figcaption class="viewer-caption" id="viewer-caption"></figcaption>
+    </figure>
+
+    <button class="viewer-nav viewer-next" type="button" id="viewer-next" aria-label="Next artwork">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M9.5 5.5L16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </dialog>
+
+  <!--
+    Adding work needs no code changes:
+    drop image files (jpg, png, webp, gif) into assets/work/ and refresh.
+    Run ./start.sh (or: node server.js) and open http://localhost:4173.
+    Titles come from the filenames.
+  -->
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "satyanarayan-sharma",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Artwork gallery for Satyanarayan Sharma",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
