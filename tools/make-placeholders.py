@@ -2,7 +2,7 @@
 """Generate abstract placeholder artworks with ffmpeg.
 
 Replace the generated files in assets/work with the artist's real images,
-then run tools/build-manifest.py to rebuild works.json.
+then run `node build-works.js` to rebuild works.json.
 """
 import json
 import subprocess

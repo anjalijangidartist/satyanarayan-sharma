@@ -23,7 +23,7 @@ The public website is unchanged. A private portal at `/manage` lets an authorize
 6. The photo becomes a GitHub blob. It is not committed yet.
 7. After all uploads, the browser sends the successful blob IDs to `/api/portal/commit`.
 8. The server checks the current branch, refuses to overwrite any existing path, updates `works.json`, creates one tree and one commit, and updates the branch without force-pushing.
-9. Vercel deploys the new commit. The portal tells the user that the site will update in a few minutes.
+9. Vercel deploys the new commit. The build runs `node build-works.js`, which rebuilds `works.json` from the files in `assets/work/` before publishing. Deleted or missing photos cannot leave stale entries. The portal tells the user that the site will update in a few minutes.
 
 Existing photos are never modified or deleted. Files that already exist are automatically given a new suffix such as `-2`. If the branch changes during a commit, the server retries against the new branch head safely.
 
@@ -132,7 +132,7 @@ If some photos fail, the page says which ones failed and offers **Retry failed**
 - Each upload is limited to 4 MB because Vercel rejects larger serverless request bodies. Larger phone photos are resized and compressed in the browser before upload.
 - JPEG, PNG and WebP only. The server checks the actual file signature, not just the filename.
 - Photos go to `assets/work/` only.
-- `works.json` is updated automatically. On the first real upload, the sample placeholders are removed from the manifest, matching the existing `tools/build-manifest.py` behaviour. Placeholder image files and `.placeholders.json` are not deleted.
+- `works.json` is updated automatically. On the first real upload, the sample placeholders are removed from the manifest, matching the existing `build-works.js` behaviour. Placeholder image files and `.placeholders.json` are not deleted.
 - Login attempts are limited to 8 per 15 minutes per client address. Without Upstash configured, this limit is best-effort per serverless instance.
 - Session cookies expire after 12 hours. Signing out clears the cookie.
 
