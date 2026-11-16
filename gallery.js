@@ -118,6 +118,10 @@ function finish() {
   observer.disconnect();
 }
 
+function flushGallery() {
+  while (state.rendered < state.works.length) renderBatch();
+}
+
 function loadMore() {
   if (state.rendered >= state.works.length) {
     finish();
@@ -322,7 +326,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const coarsePointer = window.matchMedia("(pointer: coarse)");
 
 for (const link of document.querySelectorAll('a[href^="#"]')) {
-  link.addEventListener("click", (event) => {
+  link.addEventListener("click", async (event) => {
     const id = link.getAttribute("href").slice(1);
     const target = document.getElementById(id);
     if (!target) return;
@@ -331,9 +335,15 @@ for (const link of document.querySelectorAll('a[href^="#"]')) {
     const behavior = reduceMotion.matches || coarsePointer.matches ? "auto" : "smooth";
     if (id === "top") {
       window.scrollTo({ top: 0, behavior });
-    } else {
-      target.scrollIntoView({ behavior, block: "start" });
+      history.replaceState(null, "", `#${id}`);
+      return;
     }
+
+    await ready;
+    if (gallery.compareDocumentPosition(target) & Node.DOCUMENT_POSITION_FOLLOWING) {
+      flushGallery();
+    }
+    target.scrollIntoView({ behavior, block: "start" });
     history.replaceState(null, "", `#${id}`);
   });
 }
@@ -344,4 +354,4 @@ window.addEventListener("resize", () => {
   resizeTimer = window.setTimeout(handleResize, 180);
 });
 
-start();
+const ready = start();
