@@ -318,6 +318,26 @@ document.getElementById("viewer-prev").addEventListener("click", () => stepViewe
 document.getElementById("viewer-next").addEventListener("click", () => stepViewer(1));
 document.getElementById("viewer-close").addEventListener("click", closeViewer);
 
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const coarsePointer = window.matchMedia("(pointer: coarse)");
+
+for (const link of document.querySelectorAll('a[href^="#"]')) {
+  link.addEventListener("click", (event) => {
+    const id = link.getAttribute("href").slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    event.preventDefault();
+    const behavior = reduceMotion.matches || coarsePointer.matches ? "auto" : "smooth";
+    if (id === "top") {
+      window.scrollTo({ top: 0, behavior });
+    } else {
+      target.scrollIntoView({ behavior, block: "start" });
+    }
+    history.replaceState(null, "", `#${id}`);
+  });
+}
+
 let resizeTimer = 0;
 window.addEventListener("resize", () => {
   window.clearTimeout(resizeTimer);
